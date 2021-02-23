@@ -1,0 +1,38 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Packages
+      run: npm install
+
+    - name: Run the tests and generate coverage report
+      run: npm test -- --coverage --watchAll=false
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+
+    - name: Build page
+      run: npm run build
+      env:
+        CI: ""
+
+    - name: Push to Heroku
+      run: git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/poketraderfront.git $GITHUB_SHA:master
