@@ -10,14 +10,11 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
   response => {
-    console.log("response")
-    console.log(response)
     return response
   },
   error => {
     const originalRequest = error.config
-    console.log("error")
-    console.log(error)
+    return originalRequest
   }
 )
 

@@ -47,14 +47,11 @@ class LoginScreen extends React.Component {
     try {
       const result = await sendLoginRequest(this.state.username, this.state.password )
       if(result.status === 200) {
-        console.log("entrou em status 200 no login")
-        console.log(result)
-        // axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.access
-        // localStorage.setItem('access_token', result.data.access)
-        // this.setState({succesfulLogin:true})
+        axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
+        localStorage.setItem('access_token', result.data.auth_token)
+        this.setState({succesfulLogin:true})
       }
     } catch (e) {
-      console.log("erro no loginMethod")
       console.log(e)
     }
   }
@@ -75,13 +72,12 @@ componentDidMount() {
 
   render() {
     const { classes } = this.props
-    if(this.state.succesfulLogin) {
-      console.log("login realizado")
-    }
     return (
       <div>
         {this.state.succesfulLogin ?
-           '' :
+           <div>
+            <h1> Logou fera </h1>
+           </div> :
            <Grid container className={classes.body}>
             <Grid item className={classes.loginForm}>
             {this.state.error.status ?
