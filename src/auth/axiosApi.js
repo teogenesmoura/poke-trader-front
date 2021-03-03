@@ -4,16 +4,19 @@ import {APPLICATION_SERVER_API_BASE_URL, TOKEN_STATUS_URL} from './../api_urls'
 const axiosInstance = axios.create({
   baseURL: APPLICATION_SERVER_API_BASE_URL,
   headers: {
-    'Authorization': localStorage.getItem('access_token') ? "JWT " + localStorage.getItem('access_token') : null,
     'Content-Type': 'application/json',
-    'accept': 'application/json'
   }
 })
 
 axiosInstance.interceptors.response.use(
-  response => response,
+  response => {
+    console.log("response")
+    console.log(response)
+    return response
+  },
   error => {
     const originalRequest = error.config
+    console.log("error")
     console.log(error)
   }
 )
