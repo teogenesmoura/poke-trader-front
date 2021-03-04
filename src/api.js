@@ -1,0 +1,23 @@
+import axiosInstance from './auth/axiosApi'
+import {LOGIN_URL, APPLICATION_SERVER_API_BASE_URL, TOKEN_STATUS_URL, REGISTER_URL} from './api_urls'
+
+export async function sendRegistrationRequest(username, password, email) {
+  console.log("chega em sendRegistrationRequest user")
+  const response = await axiosInstance.post(REGISTER_URL, {
+    email: email,
+    password: password,
+    username: username
+  })
+  return response
+}
+
+export async function verifyUserToken(token) {
+  const url = APPLICATION_SERVER_API_BASE_URL + "/" + TOKEN_STATUS_URL
+  const access_token = "Bearer " + localStorage.getItem('access_token')
+  const response = await axiosInstance.get(url, {
+    headers: {
+      'Authorization': access_token
+    }
+  })
+  return response
+}

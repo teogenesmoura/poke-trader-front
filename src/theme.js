@@ -3,10 +3,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
   export const customTheme = createMuiTheme(
     {
     typography: {
-      fontFamily: "OpenSans",
+      fontFamily: "Open Sans, sans-serif",
+      light: 300,
+      regular: 400,
+      medium: 600,
+      bold: 700,
       body:{
         fontSize:12,
-        fontStyle: 'semibold',
+        fontStyle: 'regular',
       },
       h1:{
         fontSize:54,
@@ -47,7 +51,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
     },
     palette: {
       primary: {
-        main: '#007E5A',
+        main: '#000',
       },
       cinza1: {
         main: '#F2F2F2',

@@ -2,8 +2,10 @@ import React, { Component } from "react"
 import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 import Dashboard from "./containers/DashboardContainer"
 import LoginScreen from "./containers/LoginScreenContainer"
+import RegisterScreen from "./containers/RegisterScreenContainer"
 import axiosInstance from './auth/axiosApi'
-import {INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, TOKEN_STATUS_URL, LOGIN_URL, LOGOUT_URL, REGISTER_URL} from './api_urls'
+import {INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, TOKEN_STATUS_URL, LOGIN_URL, LOGOUT_URL, REGISTER_USER_PATH} from './api_urls'
+import {verifyUserToken} from './api'
 
 class PrivateRouteAuth extends Component{
     constructor(props){
@@ -17,13 +19,12 @@ class PrivateRouteAuth extends Component{
 
     async checkIfUserIsAuthenticated(callback){
         try{
-            const response = await axiosInstance.post(TOKEN_STATUS_URL, {
-                token: localStorage.getItem('access_token')
-            });
-
+            const response = await verifyUserToken()
             if(response.status === 200){
+                console.log("entra em checkIfUserIsAuthenticated com status 200")
                 this.setState({isAuthenticaded:true})
             }else{
+                console.log("nao entra em checkIfUserIsAuthenticated com status 200")
                 this.setState({isAuthenticaded:false});
             }
             callback()
@@ -68,6 +69,9 @@ const AppRouter = (props) => (
     <Switch>
       <Route exact path={INITIAL_PAGE_PATH}>
         <LoginScreen theme={props.theme}></LoginScreen>
+      </Route>
+      <Route exact path={REGISTER_USER_PATH}>
+        <RegisterScreen theme={props.theme}></RegisterScreen>
       </Route>
       {/*Authenticated routes */}
       <PrivateRouteAuth>
