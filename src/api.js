@@ -2,7 +2,6 @@ import axiosInstance from './auth/axiosApi'
 import {LOGIN_URL, APPLICATION_SERVER_API_BASE_URL, TOKEN_STATUS_URL, REGISTER_URL} from './api_urls'
 
 export async function sendRegistrationRequest(username, password, email) {
-  console.log("chega em sendRegistrationRequest user")
   const response = await axiosInstance.post(REGISTER_URL, {
     email: email,
     password: password,

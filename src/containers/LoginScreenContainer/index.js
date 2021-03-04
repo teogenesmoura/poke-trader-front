@@ -71,6 +71,7 @@ class LoginScreen extends React.Component {
     try {
       const result = await sendLoginRequest(this.state.username, this.state.password )
       if(result.status === 200) {
+        debugger
         axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
         localStorage.setItem('access_token', result.data.auth_token)
         this.setState({succesfulLogin:true})
@@ -94,12 +95,12 @@ componentDidMount() {
     this.setState({username: e.target.value})
   }
 
-  handlePasswordFormChange = (e) => {
+  handlePasswordChange = (e) => {
     this.setState({password: e.target.value})
   }
 
   redirectUser = () => {
-    window.location.href = DASHBOARD_PAGE_PATH
+    window.location.assign(DASHBOARD_PAGE_PATH)
   }
 
   render() {
@@ -120,7 +121,7 @@ componentDidMount() {
                                onChange={(e)=>{this.handleUsernameChange(e)}} className={classes.textField}
                                fullWidth autoFocus required />
                     <TextField variant="outlined" value={this.state.password} placeholder="password" className={classes.textField}
-                             id="password" type="password" onChange={(e)=>{this.handlePasswordFormChange(e)}} fullWidth required />
+                             id="password" type="password" onChange={(e)=>{this.handlePasswordChange(e)}} fullWidth required />
                       <Button style= {{textTransform: 'capitalize'}} className={classes.loginButton} onClick={this.loginMethod} variant="outlined">
                           <Typography className={classes.loginLabel}>
                             Login
