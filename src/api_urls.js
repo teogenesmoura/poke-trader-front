@@ -2,12 +2,12 @@ module.exports = Object.freeze({
   // APPLICATION URLS
   APPLICATION_SERVER_API_BASE_URL: process.env.REACT_APP_APPLICATION_SERVER_URL,
 
-  // ROUTES
+  // INTERNAL ROUTES
   INITIAL_PAGE_PATH: '/',
   DASHBOARD_PAGE_PATH: '/dashboard',
   REGISTER_USER_PATH: '/register',
-  LOGIN_USER_PATH: '/login',
-
+  HISTORY_PAGE_PATH: '/history',
+  LOGOUT_PAGE_PATH: '/logout',
   // BACKEND API
   TOKEN_STATUS_URL:  '/auth/status',
   LOGIN_URL: '/auth/login',

@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from './../../components/Header'
 
 export default function Dashboard() {
   return (
-    <div>
-      estás na dashboard logado meu filho
-    </div>
+    <>
+      <Header/>
+    </>
   )
 }
