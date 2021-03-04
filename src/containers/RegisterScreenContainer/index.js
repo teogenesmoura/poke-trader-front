@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import axiosInstance from './../../auth/axiosApi.js'
-import {sendRegistrationRequest} from './../../api'
+import {sendRegistrationRequest} from './sendRegistrationRequest'
 import {Grid, TextField, Button, Link, Typography } from '@material-ui/core'
 import {Alert} from '@material-ui/lab'
 import {withStyles} from '@material-ui/core/styles'
@@ -77,19 +77,15 @@ class RegisterScreen extends React.Component {
 
  registerUser = async(event) => {
     event.preventDefault()
-    try {
-      const result = await sendRegistrationRequest(this.state.username, this.state.password, this.state.email)
-      if(result.status === 201) {
-        axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
-        localStorage.setItem('access_token', result.data.auth_token)
-        this.setState({succesfulRegistration:true})
-      } else {
-        this.setState(prevState => ({
-          error: {...this.state.error,  status: true }
-        }))
-      }
-    } catch (e) {
-      console.log(e)
+    const result = await sendRegistrationRequest(this.state.username, this.state.password, this.state.email)
+    if(result.status === 201) {
+      axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
+      localStorage.setItem('access_token', result.data.auth_token)
+      this.setState({succesfulRegistration:true})
+    } else {
+      this.setState(prevState => ({
+        error: {...this.state.error,  status: true }
+      }))
     }
   }
 
