@@ -20,7 +20,6 @@ describe('Test register requisitions', () => {
     let data = null
     let mock = new MockAdapter(axiosInstance)
     mock.onPost(REGISTER_URL).replyOnce(500, responseMockData)
-
     data = await  sendRegistrationRequest("test_user", "test_user@test.com", "test_user")
     expect(data).not.toBeNull()
     expect(data).not.toBeUndefined()
