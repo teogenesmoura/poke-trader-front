@@ -3,7 +3,7 @@ import {Grid, Link} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Logo from './../../assets/logo.svg'
 import User from './../../assets/user.svg'
-import  { INITIAL_PAGE_PATH, HISTORY_PAGE_PATH, LOGOUT_PAGE_PATH } from './../../api_urls'
+import  { INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, HISTORY_PAGE_PATH, LOGOUT_PAGE_PATH } from './../../api_urls'
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
     height: '15vh',
-    padding: '0 20rem'
+    padding: '0 10rem'
   },
   navigationLinks: {
     fontWeight: theme.typography.regular,
@@ -46,7 +46,7 @@ export default function Header() {
         <img src={Logo} height="auto" alt="poketrader logo" />
       </Grid>
       <Grid item sm={6} className={classes.navigation}>
-        <Link href={INITIAL_PAGE_PATH} id="home" className={classes.navigationLinks}> Home </Link>
+        <Link href={DASHBOARD_PAGE_PATH} id="home" className={classes.navigationLinks}> Home </Link>
         <Link href={HISTORY_PAGE_PATH} id="history" className={classes.navigationLinks}> History </Link>
         <Link href={INITIAL_PAGE_PATH} id="about" className={classes.navigationLinks}> About </Link>
       </Grid>

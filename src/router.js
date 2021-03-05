@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-do
 import Dashboard from "./containers/DashboardContainer"
 import LoginScreen from "./containers/LoginScreenContainer"
 import RegisterScreen from "./containers/RegisterScreenContainer"
+import Content from "./components/Content"
+import History from "./components/History"
 import axiosInstance from './auth/axiosApi'
-import {INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, TOKEN_STATUS_URL, LOGIN_URL, LOGOUT_URL, REGISTER_USER_PATH} from './api_urls'
+import {INITIAL_PAGE_PATH, HISTORY_PAGE_PATH, DASHBOARD_PAGE_PATH, TOKEN_STATUS_URL, LOGIN_URL, LOGOUT_URL, REGISTER_USER_PATH} from './api_urls'
 import {verifyUserToken} from './api'
 
 class PrivateRouteAuth extends Component{
@@ -76,7 +78,10 @@ const AppRouter = (props) => (
       {/*Authenticated routes */}
       <PrivateRouteAuth>
         <Route exact path={DASHBOARD_PAGE_PATH}
-                     children={<Dashboard />}
+                     children={<Dashboard><Content /></Dashboard>}
+                     theme={props.theme} />
+        <Route exact path={HISTORY_PAGE_PATH}
+                     children={<Dashboard><History /></Dashboard>}
                      theme={props.theme} />
       </PrivateRouteAuth>
     </Switch>

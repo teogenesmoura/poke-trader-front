@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'auto',
-    minHeight: '50vh',
-    maxHeight: '50vh'
+    height: '60vh',
+    display: 'flex',
+    flexDirection: 'column'
   },
   button: {
     margin: theme.spacing(0.5, 0),
@@ -64,10 +65,22 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonAddCreature: {
     textTransform: 'capitalize',
+<<<<<<< HEAD
+=======
+    alignSelf: 'center',
+    justifyContent: 'flex-end'
+>>>>>>> #9 Introducing History page and minor visual change to Content page
   },
   buttonText: {
     fontWeight: theme.typography.medium,
     textTransform: 'capitalize'
+<<<<<<< HEAD
+=======
+  },
+  list: {
+    height: '45vh',
+    overflow: 'auto'
+>>>>>>> #9 Introducing History page and minor visual change to Content page
   }
 }));
 
@@ -124,8 +137,12 @@ export default function Content() {
 
   const customList = (items, setItems) => (
     <Paper className={classes.paper} elevation={10}>
+<<<<<<< HEAD
 
       <List dense component="div" role="list">
+=======
+      <List dense className={classes.list} component="div" role="list">
+>>>>>>> #9 Introducing History page and minor visual change to Content page
         {items.map((item) => {
           const labelId = `transfer-list-item-${item.id}-label`;
           return (
@@ -154,9 +171,15 @@ export default function Content() {
                   </Grid>
                 </Grid>
               </ListItem>
+<<<<<<< HEAD
           );
         })}
       </List>
+=======
+              );
+            })}
+          </List>
+>>>>>>> #9 Introducing History page and minor visual change to Content page
         <Button color="secondary"
                 className={classes.buttonAddCreature}
                 variant={items.length < MAX_ITEMS ? "contained" : "disabled" }

@@ -13,7 +13,7 @@ module.exports = Object.freeze({
   REGISTER_URL: '/auth/register',
   LOGOUT_URL: '/auth/logout',
   CREATE_ENTRY_USER: '/user/entry',
-  GET_ENTRIES_USER: '/user/entries',
+  USER_ENTRIES: '/user/entries',
   // EXTERNAL RESOURCE
   POKE_API_SEARCH_BY_NAME_URL: 'https://pokeapi.co/api/v2/pokemon/',
   POKE_SPRITES_URL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
