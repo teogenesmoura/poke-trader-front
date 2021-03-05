@@ -70,7 +70,6 @@ class LoginScreen extends React.Component {
     try {
       const result = await sendLoginRequest(this.state.username, this.state.password )
       if(result.status === 200) {
-        debugger
         axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
         localStorage.setItem('access_token', result.data.auth_token)
         this.setState({succesfulLogin:true})

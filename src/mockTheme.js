@@ -72,7 +72,10 @@ export default function MockTheme({ children }: any) {
       },
       white: {
         main: '#FFF',
-      }
+      },
+      black: {
+        main: '#000'
+      },
     }
   });
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>;

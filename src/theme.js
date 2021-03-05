@@ -4,6 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
     {
     typography: {
       fontFamily: "Open Sans, sans-serif",
+      hairline: 100,
       light: 300,
       regular: 400,
       medium: 600,
@@ -51,7 +52,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
     },
     palette: {
       primary: {
-        main: '#000',
+        main: '#666666',
       },
       cinza1: {
         main: '#F2F2F2',
@@ -70,7 +71,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
       },
       white: {
         main: '#FFF',
-      }
+      },
+      black: {
+        main: '#000'
+      },
     },
-
   });

@@ -7,10 +7,8 @@ import  { INITIAL_PAGE_PATH, HISTORY_PAGE_PATH, LOGOUT_PAGE_PATH } from './../..
 
 const useStyles = makeStyles((theme) => ({
   body: {
-    width: '100%',
     height: '15vh',
-    display: 'flex',
-    justifyContent: 'space-between'
+    wrap: 'no-wrap'
   },
   navigation: {
     display: 'flex',
@@ -29,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   logo: {
-    display: 'flex',
-    justifyContent: 'space-around',
     alignItems: 'center',
     height: '15vh'
   },
