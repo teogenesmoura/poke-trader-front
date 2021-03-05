@@ -6,8 +6,8 @@ import {saveEntry} from './saveEntry'
 import Check from './../../../assets/check.svg'
 import Close from './../../../assets/close.svg'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../../api_urls'
-const LOWER_BOUND = 0.80
-const UPPER_BOUND = 1.20
+const LOWER_BOUND = 0.85
+const UPPER_BOUND = 1.15
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
@@ -86,13 +86,8 @@ export default function SimulateTrading(props){
 
   const calculateTradingFairness = () => {
     const sum_left = sumArray(left)
-    console.log("sum_left")
-    console.log(sum_left)
     const sum_right = sumArray(right)
-    console.log("sum_right")
-    console.log(sum_right)
     const diff = difference(sum_left, sum_right)
-    console.log(diff)
     if (diff >= LOWER_BOUND && diff <= UPPER_BOUND) {
       return true
     }
