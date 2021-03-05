@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { retrieveResourceByName } from './thirdPartyAPI.js'
@@ -6,8 +6,8 @@ import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
-    minHeight: '40vh',
-    maxHeight: '80vh',
+    minHeight: '30vh',
+    maxHeight: '70vh',
     padding: '1rem'
   },
   buttonRow: {
@@ -29,7 +29,7 @@ const useStylesCreatureRow = makeStyles((theme) => ({
     width: '95%'
   },
   img: {
-    maxHeight: '10vh'
+    maxHeight: '7vh'
   }
 }))
 
@@ -49,7 +49,7 @@ function CreatureRow(props) {
         {"exp. " + creature.base_experience}
       </Grid>
       <Grid item xs={3}>
-        <Button color="secondary"> Add </Button>
+        <Button color="secondary" onClick={() => props.pokemonIChooseYou(creature)}> Add </Button>
       </Grid>
     </Grid>
   )
@@ -58,9 +58,9 @@ function CreatureRow(props) {
 export default function SearchCreature(props){
   const classes = useStyles()
   const [open, setOpen] = useState(props.open);
-  const [localItems, setLocalItems] = useState(props.items)
   const [creature, setCreature] = useState(false)
   const [creatureName, setCreatureName] = useState('')
+  const [chosenCreature, setChosenCreature] = useState('')
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -70,19 +70,19 @@ export default function SearchCreature(props){
     setOpen(false);
   };
 
-  const setItems = () => {
-    props.setItems(localItems)
-  }
-
   const handleChange = (e) => {
     setCreatureName(e.target.value)
+  }
+
+  const pokemonIChooseYou = (creature) => {
+    setChosenCreature(creature)
+    props.setItems(prevState => [...prevState, creature])
   }
 
   const retrieveResource = async(event) => {
     const response = await retrieveResourceByName(creatureName.toLowerCase())
     if(response) {
       setCreature(response.data)
-      console.log(response.data)
     } else {
       setCreature('')
     }
@@ -106,7 +106,7 @@ export default function SearchCreature(props){
         </DialogContent>
         <DialogActions>
         </DialogActions>
-        {creature ? <CreatureRow creature={creature} /> : ''}
+        {creature ? <CreatureRow creature={creature} pokemonIChooseYou={pokemonIChooseYou} /> : ''}
         <Grid container className={classes.buttonRow}>
           <Button onClick={handleClose} color="primary">
             Cancel
