@@ -11,7 +11,6 @@ import MockTheme from './../../../mockTheme';
 import {fetchUserEntries} from './../fetchUserEntries'
 
 describe('Test lifecycle for retrieving an users history', () => {
-
   test('Tests loading history page', () => {
     const wrapper = mount(<Router><MockTheme><History /></MockTheme></Router>)
     let mockInstance = new MockAdapter(axiosInstance)

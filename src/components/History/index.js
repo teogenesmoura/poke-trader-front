@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useRef} from 'react'
 import {Grid, Divider, Typography,Paper} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { fetchUserEntries } from './fetchUserEntries'
@@ -83,6 +83,7 @@ const EntryRow = (props) => {
   )
 }
 export default function History() {
+  const firstUpdate = useRef(true)
   const classes = useStyles()
   const [entries, setEntries] = useState([])
   const [noDataFound, setNoDataFound] = useState(true)
