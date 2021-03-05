@@ -1,22 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import {Grid, Typography,Paper} from '@material-ui/core'
+import {Grid, Divider, Typography,Paper} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { fetchUserEntries } from './fetchUserEntries'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
 
 const useStyles = makeStyles((theme) => ({
   body: {
-    margin: 'auto',
+    margin: '4rem 0 0 0',
     height: '70vh',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  flexContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: 0,
+    padding: '0 5rem',
   },
   noEntries: {
     fontSize: theme.typography.h3.fontSize,
@@ -29,10 +25,8 @@ const useStylesEntryRow = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    border: '1px #666',
-    borderRadius: '6px',
-    margin: '2rem 0 0 0',
-    width: '100%',
+    maxWidth: '100%',
+    margin: '0 0 12rem 0'
   },
   name: {
     fontWeight: theme.typography.bold
@@ -44,6 +38,12 @@ const useStylesEntryRow = makeStyles((theme) => ({
   tradeNotFair: {
     fontWeight: theme.typography.medium,
     color: theme.palette.red.main
+  },
+  creatureRow: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    maxWidth: '100%'
   }
 }))
 
@@ -55,26 +55,31 @@ const EntryRow = (props) => {
   const opponent = JSON.parse(entry.opponent)
 
   const row = (creature) => {
-    return <Grid item xs={3}>
-              <img src={POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT} />
-              <Typography className={classes.name}>{creature.name}</Typography>
-              <Typography>"Exp. " + {creature.base_experience}</Typography>
-            </Grid>
+    return <div class="row">
+            <img src={POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT} />
+            <Typography className={classes.name}>{creature.name}</Typography>
+            <Typography>"Exp. " + {creature.base_experience}</Typography>
+          </div>
   }
 
   return (
-      <Grid container className={classes.body}>
-        {host.map(creature => {
-          return row(creature)
-        })}
-        {entry.isTradeFair ?
-          <Typography className={classes.tradeFair}> The trade was considered fair </Typography> :
-          <Typography className={classes.tradeNotFair}> The trade was not considered fair </Typography>}
-        {opponent.map(creature => {
-          return row(creature)
-        })}
-        {console.log(entry)}
-      </Grid>
+        <Grid container className={classes.body}>
+          <Grid item xs={4}  className={classes.creatureRow}>
+            {host.map(creature => {
+              return row(creature)
+            })}
+          </Grid>
+          <Grid item xs={4}>
+            {entry.isTradeFair ?
+              <Typography className={classes.tradeFair}> The trade was considered fair </Typography> :
+              <Typography className={classes.tradeNotFair}> The trade was not considered fair </Typography>}
+          </Grid>
+          <Grid item xs={4} className={classes.creatureRow}>
+            {opponent.map(creature => {
+              return row(creature)
+            })}
+          </Grid>
+        </Grid>
   )
 }
 export default function History() {
@@ -103,18 +108,12 @@ export default function History() {
         <Grid item sm={12}>
           <Typography className={classes.noEntries}> You have no entries so far </Typography>
         </Grid> :
-        entries.map(entry => {
-          return <EntryRow entry={entry} />
-        })
+        <Grid item sm={12}>
+          {entries.map(entry => {
+            return <EntryRow entry={entry} />
+          })}
+        </Grid>
       }
     </Grid>
   )
 }
-// <List className={classes.flexContainer}>
-// {console.log("entries")}
-// {console.log(entries)}
-// { entries.length > 0 ? entries.map(function(entry) {
-//     return <Grid item xs={12}><EntryRow entry={entry} /></Grid>
-//   }) : console.log("diacho")}
-// </List>
-// {entries ? entries.forEach(entry => console.log(entry)) : ''}
