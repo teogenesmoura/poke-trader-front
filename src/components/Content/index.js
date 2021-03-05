@@ -161,7 +161,7 @@ export default function Content() {
                 </Grid>
               </ListItem>
               );
-            })}
+            })} 
           </List>
         <Button color="secondary"
                 className={classes.buttonAddCreature}
