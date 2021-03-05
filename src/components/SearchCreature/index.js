@@ -109,7 +109,7 @@ export default function SearchCreature(props){
         {creature ? <CreatureRow creature={creature} pokemonIChooseYou={pokemonIChooseYou} /> : ''}
         <Grid container className={classes.buttonRow}>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Close
           </Button>
           <Button variant="outlined" style={{textTransform: 'none'}} color="primary" onClick={retrieveResource}>
             Search

@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import ModalProvider,{ useModal } from 'mui-modal-provider'
-import {Grid, DialogTitle, Typography, List, ListItem, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import {Grid, DialogTitle, Typography, List, ListItem, ListSubheader, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert';
 import SearchCreature from './../SearchCreature'
 import Dialog from '@material-ui/core/Dialog'
+import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+const MAX_ITEMS = 6
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -13,6 +17,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'auto',
+    minHeight: '50vh',
+    maxHeight: '50vh'
   },
   button: {
     margin: theme.spacing(0.5, 0),
@@ -36,6 +42,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     margin: '0 0 2rem 0'
   },
+  listRow: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  img: {
+    maxHeight: '10vh'
+  },
+  item: {
+    fontWeight: theme.typography.medium,
+    alignSelf: 'center',
+    textTransform: 'capitalize'
+  },
+  maxItemsAlert: {
+    color: 'red',
+    fontSize: theme.typography.h5.fontSize,
+    fontWeight: theme.typography.medium
+  }
 }));
 
 
@@ -50,8 +74,8 @@ function intersection(a, b) {
 export default function Content() {
   const classes = useStyles()
   const [checked, setChecked] = useState([])
-  const [left, setLeft] = useState([0, 1, 2, 3])
-  const [right, setRight] = useState([4, 5, 6, 7])
+  const [left, setLeft] = useState([])
+  const [right, setRight] = useState([])
   const { showModal } = useModal()
   const leftChecked = intersection(checked, left)
   const rightChecked = intersection(checked, right)
@@ -92,32 +116,46 @@ export default function Content() {
   const customList = (items, setItems) => (
     <Paper className={classes.paper}>
       <List dense component="div" role="list">
-        {items.map((value) => {
-          const labelId = `transfer-list-item-${value}-label`;
+        {items.map((item) => {
+          const labelId = `transfer-list-item-${item.id}-label`;
           return (
-            <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <Typography>{`List item ${value + 1}`}</Typography>
-            </ListItem>
+              <ListItem key={item.id} role="listitem" button onClick={handleToggle(item)}>
+                <Grid container className={classes.listRow}>
+                  <Grid item sm={1}>
+                    <ListItemIcon>
+                      <Checkbox
+                        checked={checked.indexOf(item) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </ListItemIcon>
+                  </Grid>
+                  <Grid item sm={3}>
+                    <img src={POKE_SPRITES_URL+item.id+POKE_SPRITES_FORMAT} className={classes.img} />
+                  </Grid>
+                  <Grid item sm={1}></Grid>
+                  <Grid item sm={2}>
+                    <Typography className={classes.item}>{item.name}</Typography>
+                  </Grid>
+                  <Grid item sm={2}></Grid>
+                  <Grid item sm={2}>
+                    <Typography className={classes.item}>{"exp. " + item.base_experience}</Typography>
+                  </Grid>
+                </Grid>
+              </ListItem>
           );
         })}
-        <ListItem />
       </List>
       <div className={classes.addCreatureRow}>
         <Button color="primary"
-                variant="contained"
+                variant={items.length < MAX_ITEMS ? "contained" : "disabled" }
                 onClick={() => showModal(SearchCreature, { open: true, items: items, setItems: setItems})}
                 disableElevation>
           Add pokemon
         </Button>
       </div>
+      {items.length === MAX_ITEMS ? <Alert severity="error">You've already selected 6 creatures!</Alert>  : ''}
     </Paper>
   );
 
