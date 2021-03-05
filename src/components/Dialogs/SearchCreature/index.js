@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { retrieveResourceByName } from './thirdPartyAPI.js'
-import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../../api_urls'
+import CreatureRow from './../CreatureRow'
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
@@ -21,45 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const useStylesCreatureRow = makeStyles((theme) => ({
-  body: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    margin: '1rem',
-    width: '100%'
-  },
-  img: {
-    maxHeight: '7vh'
-  },
-  text: {
-    textTransform: 'capitalize'
-  }
-}))
-
-function CreatureRow(props) {
-  const classes = useStylesCreatureRow()
-  const creature = props.creature
-  const sprite = POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT
-  return (
-    <Grid container className={classes.body}>
-      <Grid item xs={2}>
-        <img src={sprite} className={classes.img} />
-      </Grid>
-      <Grid item xs={1}></Grid>
-      <Grid item xs={3} className={classes.text}>
-        {creature.name}
-      </Grid>
-      <Grid item xs={3} className={classes.text}>
-        {"exp. " + creature.base_experience}
-      </Grid>
-      <Grid item xs={1}></Grid>
-      <Grid item xs={2} className={classes.button}>
-        <Button color="secondary" onClick={() => props.pokemonIChooseYou(creature)}> Add </Button>
-      </Grid>
-    </Grid>
-  )
-}
 
 export default function SearchCreature(props){
   const classes = useStyles()
@@ -68,9 +29,6 @@ export default function SearchCreature(props){
   const [creatureName, setCreatureName] = useState('')
   const [chosenCreature, setChosenCreature] = useState('')
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);

@@ -42,38 +42,6 @@ describe('Test lifecycle for simulating a trade and persisting it', () => {
     const button = wrapper.find("button").at(0)
     button.simulate('click')
     wrapper.update()
-    
+
   })
-  //
-  // test("Test if login function get called succesfully", async() => {
-  //   let mockInstance = new MockAdapter(axiosInstance)
-  //   await mockInstance.onPost(LOGIN_URL).reply(200, responseMockData)
-  //
-  //   const wrapper = mount(<Router><MockTheme><LoginScreen/></MockTheme></Router>)
-  //   const emailField = wrapper.find('input').at(0)
-  //   emailField.instance().value = "test_user"
-  //   emailField.simulate("change")
-  //   const passwordField = wrapper.find('input').at(1)
-  //   console.log(passwordField.debug())
-  //   passwordField.instance().value = "test_user"
-  //   passwordField.simulate("change")
-  //   const button = wrapper.find("button").at(0);
-  //   button.simulate('click')
-  // })
-  //
-  // test("Test if login function gets error from server", async() => {
-  //   let mockInstance = new MockAdapter(axiosInstance)
-  //   await mockInstance.onPost(LOGIN_URL).reply(500)
-  //
-  //   const wrapper = mount(<Router><MockTheme><LoginScreen/></MockTheme></Router>)
-  //   const emailField = wrapper.find('input').at(0)
-  //   emailField.instance().value = "test_user"
-  //   emailField.simulate("change")
-  //   const passwordField = wrapper.find('input').at(1)
-  //   console.log(passwordField.debug())
-  //   passwordField.instance().value = "test_user"
-  //   passwordField.simulate("change")
-  //   const button = wrapper.find("button").at(0);
-  //   button.simulate('click')
-  // })
 })
