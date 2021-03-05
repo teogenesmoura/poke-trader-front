@@ -12,5 +12,9 @@ module.exports = Object.freeze({
   TOKEN_STATUS_URL:  '/auth/status',
   LOGIN_URL: '/auth/login',
   REGISTER_URL: '/auth/register',
-  LOGOUT_URL: '/auth/logout'
+  LOGOUT_URL: '/auth/logout',
+  // EXTERNAL RESOURCE
+  POKE_API_SEARCH_BY_NAME_URL: 'https://pokeapi.co/api/v2/pokemon/',
+  POKE_SPRITES_URL: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/',
+  POKE_SPRITES_FORMAT: '.png',
 })

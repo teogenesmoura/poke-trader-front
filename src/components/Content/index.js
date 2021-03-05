@@ -1,6 +1,9 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Grid, List, ListItem, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles'
+import ModalProvider,{ useModal } from 'mui-modal-provider'
+import {Grid, DialogTitle, Typography, List, ListItem, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import SearchCreature from './../SearchCreature'
+import Dialog from '@material-ui/core/Dialog'
 
 const useStyles = makeStyles((theme) => ({
   body: {
@@ -16,8 +19,25 @@ const useStyles = makeStyles((theme) => ({
   },
   transferList: {
     width: '30%'
-  }
+  },
+  playerTitle: {
+    fontFamily: 'Press Start 2P',
+    fontSize: theme.typography.h5.fontSize,
+    fontWeight: theme.typography.medium,
+    color: theme.palette.grey.main,
+    margin: '0 0 2rem 0'
+  },
+  middleColumn: {
+    margin: '3rem 0 0 0'
+  },
+  addCreatureRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 0 2rem 0'
+  },
 }));
+
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -28,55 +48,52 @@ function intersection(a, b) {
 }
 
 export default function Content() {
-  const classes = useStyles();
-  const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([0, 1, 2, 3]);
-  const [right, setRight] = React.useState([4, 5, 6, 7]);
-
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+  const classes = useStyles()
+  const [checked, setChecked] = useState([])
+  const [left, setLeft] = useState([0, 1, 2, 3])
+  const [right, setRight] = useState([4, 5, 6, 7])
+  const { showModal } = useModal()
+  const leftChecked = intersection(checked, left)
+  const rightChecked = intersection(checked, right)
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
+    const currentIndex = checked.indexOf(value)
+    const newChecked = [...checked]
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newChecked.push(value)
     } else {
-      newChecked.splice(currentIndex, 1);
+      newChecked.splice(currentIndex, 1)
     }
-
-    setChecked(newChecked);
+    setChecked(newChecked)
   };
 
   const handleAllRight = () => {
-    setRight(right.concat(left));
-    setLeft([]);
+    setRight(right.concat(left))
+    setLeft([])
   };
 
   const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
-  };
+    setRight(right.concat(leftChecked))
+    setLeft(not(left, leftChecked))
+    setChecked(not(checked, leftChecked))
+  }
 
   const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
-    setChecked(not(checked, rightChecked));
-  };
+    setLeft(left.concat(rightChecked))
+    setRight(not(right, rightChecked))
+    setChecked(not(checked, rightChecked))
+  }
 
   const handleAllLeft = () => {
-    setLeft(left.concat(right));
-    setRight([]);
-  };
+    setLeft(left.concat(right))
+    setRight([])
+  }
 
-  const customList = (items) => (
+  const customList = (items, setItems) => (
     <Paper className={classes.paper}>
       <List dense component="div" role="list">
         {items.map((value) => {
           const labelId = `transfer-list-item-${value}-label`;
-
           return (
             <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
               <ListItemIcon>
@@ -87,20 +104,31 @@ export default function Content() {
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <Typography>{`List item ${value + 1}`}</Typography>
             </ListItem>
           );
         })}
         <ListItem />
       </List>
+      <div className={classes.addCreatureRow}>
+        <Button color="primary"
+                variant="contained"
+                onClick={() => showModal(SearchCreature, { open: true, items: items, setItems: setItems})}
+                disableElevation>
+          Add pokemon
+        </Button>
+      </div>
     </Paper>
   );
 
   return (
     <Grid container spacing={2} justify="center" alignItems="center" className={classes.body}>
-      <Grid item className={classes.transferList}>{customList(left)}</Grid>
-      <Grid item>
-        <Grid container direction="column" alignItems="center">
+      <Grid item className={classes.transferList}>
+        <Typography className={classes.playerTitle}> Host player </Typography>
+        {customList(left, setLeft)}
+      </Grid>
+      <Grid item className={classes.middleColumn}>
+        <Grid container direction="column" alignItems="center" >
           <Button
             variant="outlined"
             size="small"
@@ -143,7 +171,10 @@ export default function Content() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item className={classes.transferList}>{customList(right)}</Grid>
+      <Grid item className={classes.transferList}>
+        <Typography className={classes.playerTitle}> Opponent player </Typography>
+        {customList(right, setRight)}
+      </Grid>
     </Grid>
   );
 }

@@ -51,7 +51,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
     },
     palette: {
       primary: {
-        main: '#000',
+        main: '#666666',
       },
       cinza1: {
         main: '#F2F2F2',
