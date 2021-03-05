@@ -70,6 +70,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
       },
       white: {
         main: '#FFF',
+      },
+      black: {
+        maing: '#000'
       }
     },
 

@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     minHeight: '30vh',
     maxHeight: '70vh',
-    padding: '1rem'
+    padding: '1rem',
+    minWidth: '25%'
   },
   buttonRow: {
     display: 'flex',
@@ -24,12 +25,15 @@ const useStylesCreatureRow = makeStyles((theme) => ({
   body: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     margin: '1rem',
-    width: '95%'
+    width: '100%'
   },
   img: {
     maxHeight: '7vh'
+  },
+  text: {
+    textTransform: 'capitalize'
   }
 }))
 
@@ -39,16 +43,18 @@ function CreatureRow(props) {
   const sprite = POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT
   return (
     <Grid container className={classes.body}>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <img src={sprite} className={classes.img} />
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={3} className={classes.text}>
         {creature.name}
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={3} className={classes.text}>
         {"exp. " + creature.base_experience}
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={1}></Grid>
+      <Grid item xs={2} className={classes.button}>
         <Button color="secondary" onClick={() => props.pokemonIChooseYou(creature)}> Add </Button>
       </Grid>
     </Grid>

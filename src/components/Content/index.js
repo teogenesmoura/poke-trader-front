@@ -22,19 +22,21 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(0.5, 0),
+    width: '90%',
   },
   transferList: {
     width: '30%'
   },
   playerTitle: {
-    fontFamily: 'Press Start 2P',
+    fontFamily: "'Press Start 2P', cursive",
     fontSize: theme.typography.h5.fontSize,
     fontWeight: theme.typography.medium,
-    color: theme.palette.grey.main,
+    color: theme.palette.black.main,
     margin: '0 0 2rem 0'
   },
   middleColumn: {
-    margin: '3rem 0 0 0'
+    margin: '3rem 0 0 0',
+    minWidth: '25vh',
   },
   addCreatureRow: {
     display: 'flex',
@@ -58,6 +60,12 @@ const useStyles = makeStyles((theme) => ({
   maxItemsAlert: {
     color: 'red',
     fontSize: theme.typography.h5.fontSize,
+    fontWeight: theme.typography.medium
+  },
+  buttonAddCreature: {
+    textTransform: 'capitalize',
+  },
+  buttonText: {
     fontWeight: theme.typography.medium
   }
 }));
@@ -114,7 +122,7 @@ export default function Content() {
   }
 
   const customList = (items, setItems) => (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation="10">
       <List dense component="div" role="list">
         {items.map((item) => {
           const labelId = `transfer-list-item-${item.id}-label`;
@@ -148,11 +156,12 @@ export default function Content() {
         })}
       </List>
       <div className={classes.addCreatureRow}>
-        <Button color="primary"
+        <Button color="secondary"
+                className={classes.buttonAddCreature}
                 variant={items.length < MAX_ITEMS ? "contained" : "disabled" }
                 onClick={() => showModal(SearchCreature, { open: true, items: items, setItems: setItems})}
                 disableElevation>
-          Add pokemon
+          <Typography className={classes.buttonText}>Add pokemon</Typography>
         </Button>
       </div>
       {items.length === MAX_ITEMS ? <Alert severity="error">You've already selected 6 creatures!</Alert>  : ''}
@@ -162,7 +171,7 @@ export default function Content() {
   return (
     <Grid container spacing={2} justify="center" alignItems="center" className={classes.body}>
       <Grid item className={classes.transferList}>
-        <Typography className={classes.playerTitle}> Host player </Typography>
+        <Typography className={classes.playerTitle}> Player 1 </Typography>
         {customList(left, setLeft)}
       </Grid>
       <Grid item className={classes.middleColumn}>
@@ -210,7 +219,7 @@ export default function Content() {
         </Grid>
       </Grid>
       <Grid item className={classes.transferList}>
-        <Typography className={classes.playerTitle}> Opponent player </Typography>
+        <Typography className={classes.playerTitle}> Player 2 </Typography>
         {customList(right, setRight)}
       </Grid>
     </Grid>
