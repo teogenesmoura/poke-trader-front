@@ -1,5 +1,5 @@
 import axiosInstance from './auth/axiosApi'
-import {LOGIN_URL, APPLICATION_SERVER_API_BASE_URL, TOKEN_STATUS_URL, REGISTER_URL} from './api_urls'
+import {APPLICATION_SERVER_API_BASE_URL, TOKEN_STATUS_URL} from './api_urls'
 
 export async function verifyUserToken(token) {
   const url = APPLICATION_SERVER_API_BASE_URL + TOKEN_STATUS_URL

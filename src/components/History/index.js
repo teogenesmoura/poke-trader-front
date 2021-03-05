@@ -1,5 +1,5 @@
-import React, {useState, useEffect,useRef} from 'react'
-import {Grid, Divider, Typography,Paper} from '@material-ui/core'
+import React, {useState, useEffect} from 'react'
+import {Grid, Typography} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { fetchUserEntries } from './fetchUserEntries'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
@@ -56,7 +56,7 @@ const EntryRow = (props) => {
 
   const row = (creature) => {
     return <div class="row">
-            <img src={POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT} />
+            <img src={POKE_SPRITES_URL + creature.id + POKE_SPRITES_FORMAT} alt={"pokemon sprite"}/>
             <Typography className={classes.name}>{creature.name}</Typography>
             <Typography>"Exp. " + {creature.base_experience}</Typography>
           </div>
@@ -83,7 +83,6 @@ const EntryRow = (props) => {
   )
 }
 export default function History() {
-  const firstUpdate = useRef(true)
   const classes = useStyles()
   const [entries, setEntries] = useState([])
   const [noDataFound, setNoDataFound] = useState(true)

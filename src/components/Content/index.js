@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles'
-import ModalProvider,{ useModal } from 'mui-modal-provider'
-import {Grid, DialogTitle, Typography, List, ListItem, ListSubheader, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import { useModal } from 'mui-modal-provider'
+import {Grid, Typography, List, ListItem, ListItemIcon, Checkbox, Button, Paper} from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import SearchCreature from './../Dialogs/SearchCreature'
 import SimulateTrading from './../Dialogs/SimulateTrading'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 const MAX_ITEMS = 6
 
 const useStyles = makeStyles((theme) => ({
@@ -148,7 +147,7 @@ export default function Content() {
                     </ListItemIcon>
                   </Grid>
                   <Grid item sm={3}>
-                    <img src={POKE_SPRITES_URL+item.id+POKE_SPRITES_FORMAT} className={classes.img} />
+                    <img src={POKE_SPRITES_URL+item.id+POKE_SPRITES_FORMAT} className={classes.img} alt={"sprite"}/>
                   </Grid>
                   <Grid item sm={1}></Grid>
                   <Grid item sm={2}>
@@ -161,7 +160,7 @@ export default function Content() {
                 </Grid>
               </ListItem>
               );
-            })} 
+            })}
           </List>
         <Button color="secondary"
                 className={classes.buttonAddCreature}

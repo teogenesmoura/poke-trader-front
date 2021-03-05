@@ -1,5 +1,4 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
 import axiosInstance from './../../auth/axiosApi.js'
 import {sendRegistrationRequest} from './sendRegistrationRequest'
 import {Grid, TextField, Button, Link, Typography } from '@material-ui/core'

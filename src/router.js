@@ -5,8 +5,7 @@ import LoginScreen from "./containers/LoginScreenContainer"
 import RegisterScreen from "./containers/RegisterScreenContainer"
 import Content from "./components/Content"
 import History from "./components/History"
-import axiosInstance from './auth/axiosApi'
-import {INITIAL_PAGE_PATH, HISTORY_PAGE_PATH, DASHBOARD_PAGE_PATH, TOKEN_STATUS_URL, LOGIN_URL, LOGOUT_URL, REGISTER_USER_PATH} from './api_urls'
+import {INITIAL_PAGE_PATH, HISTORY_PAGE_PATH, DASHBOARD_PAGE_PATH, REGISTER_USER_PATH} from './api_urls'
 import {verifyUserToken} from './api'
 
 class PrivateRouteAuth extends Component{

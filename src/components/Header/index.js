@@ -3,7 +3,7 @@ import {Grid, Link, Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Logo from './../../assets/logo.svg'
 import User from './../../assets/user.svg'
-import  { INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, HISTORY_PAGE_PATH, LOGOUT_PAGE_PATH } from './../../api_urls'
+import  {DASHBOARD_PAGE_PATH, HISTORY_PAGE_PATH } from './../../api_urls'
 import { logout } from './logout'
 
 const useStyles = makeStyles((theme) => ({
