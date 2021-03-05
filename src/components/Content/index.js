@@ -17,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'auto',
-    minHeight: '50vh',
-    maxHeight: '50vh'
+    height: '60vh',
+    display: 'flex',
+    flexDirection: 'column'
   },
   button: {
     margin: theme.spacing(0.5, 0),
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   middleColumn: {
     margin: '3rem 0 0 0',
-    minWidth: '25vh',
+    minWidth: '40vh',
   },
   addCreatureRow: {
     display: 'flex',
@@ -66,8 +67,6 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
     alignSelf: 'center',
     justifyContent: 'flex-end'
-=======
->>>>>>> #9 Correcting Calculation and introducing history page
   },
   buttonText: {
     fontWeight: theme.typography.medium,
@@ -76,8 +75,6 @@ const useStyles = makeStyles((theme) => ({
   list: {
     height: '45vh',
     overflow: 'auto'
-=======
->>>>>>> #9 Correcting Calculation and introducing history page
   }
 }));
 
@@ -166,9 +163,6 @@ export default function Content() {
               );
             })}
           </List>
-          );
-        })}
-      </List>
         <Button color="secondary"
                 className={classes.buttonAddCreature}
                 variant={items.length < MAX_ITEMS ? "contained" : "disabled" }
