@@ -11,6 +11,7 @@ async function sanitizeEntry(entry) {
 }
 
 export async function saveEntry(left, right, isTradeFair) {
+  if(left.length === 0 || right.length === 0) return false
   let clean_left = await sanitizeEntry(left)
   let clean_right = await sanitizeEntry(right)
   const response = await axiosInstance.post(CREATE_ENTRY_USER, {

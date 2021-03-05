@@ -108,12 +108,13 @@ export default function SimulateTrading(props){
 
   const handleClick = async(event) => {
     const response = await saveEntry(left, right, isTradeFair)
+    console.log(JSON.stringify(response))
     if(response.status == 200) {
       setSaveEntrySuccess(true)
       setSnackbarOpen(true)
     } else {
       setSaveEntrySuccess(false)
-      setSnackbarOpen(false)
+      setSnackbarOpen(true)
     }
   }
 
@@ -143,27 +144,8 @@ export default function SimulateTrading(props){
                <Typography>There was an error with your request :(</Typography>
             </Alert>
           }
-
         </Snackbar>
       </Dialog>
     </>
   )
 }
-
-// {creature ? <CreatureRow creature={creature} pokemonIChooseYou={pokemonIChooseYou} /> : ''}
-// <DialogTitle id="form-dialog-title">Search a pokemon</DialogTitle>
-//   <DialogContent>
-//     <DialogContentText>
-//       Type the name of the pokemon in the form below
-//       </DialogContentText>
-//   </DialogContent>
-//   <DialogActions>
-//   </DialogActions>
-//   <Grid container className={classes.buttonRow}>
-//     <Button onClick={handleClose} color="primary">
-//       Close
-//     </Button>
-//     <Button variant="outlined" style={{textTransform: 'none'}} color="primary">
-//       Search
-//     </Button>
-//   </Grid>

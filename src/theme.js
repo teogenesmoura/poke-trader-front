@@ -73,8 +73,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
         main: '#FFF',
       },
       black: {
-        maing: '#000'
-      }
+        main: '#000'
+      },
     },
-
   });
