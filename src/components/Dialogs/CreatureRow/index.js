@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {Grid, Button} from '@material-ui/core'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../../api_urls'
 import { makeStyles } from '@material-ui/core/styles'
@@ -26,7 +26,7 @@ export default function CreatureRow(props) {
   return (
     <Grid container className={classes.body}>
       <Grid item xs={2}>
-        <img src={sprite} className={classes.img} />
+        <img src={sprite} className={classes.img} alt={"sprite"}/>
       </Grid>
       <Grid item xs={1}></Grid>
       <Grid item xs={3} className={classes.text}>

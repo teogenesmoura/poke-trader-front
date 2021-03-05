@@ -1,14 +1,13 @@
 import React from 'react'
 import Header from './../../components/Header'
-import Content from './../../components/Content'
-import ModalProvider, { useModal } from 'mui-modal-provider';
+import ModalProvider from 'mui-modal-provider';
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   return (
     <>
       <Header/>
       <ModalProvider>
-        <Content />
+        {props.children}
       </ModalProvider>
     </>
   )

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {Grid, Link, Snackbar, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@material-ui/core'
+import {Grid, Snackbar, Typography, Button, Dialog} from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
 import {saveEntry} from './saveEntry'
 import Check from './../../../assets/check.svg'
 import Close from './../../../assets/close.svg'
-import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../../api_urls'
-const FAIRNESS_THRESHOLD = 0.2
+const LOWER_BOUND = 0.85
+const UPPER_BOUND = 1.15
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
@@ -79,16 +79,15 @@ export default function SimulateTrading(props){
     }, 0)
   }
 
-  //source: https://stackoverflow.com/questions/23759782/javascript-percentage-difference-between-two-values
-  const relativeDifference = (a, b) => {
-    return  100 * Math.abs((a-b)/((a+b)/2))
+  const difference = (a, b) => {
+    return Math.abs(a/b)
   }
 
   const calculateTradingFairness = () => {
     const sum_left = sumArray(left)
     const sum_right = sumArray(right)
-    const diff = relativeDifference(sum_left, sum_right)
-    if (diff <= FAIRNESS_THRESHOLD) {
+    const diff = difference(sum_left, sum_right)
+    if (diff >= LOWER_BOUND && diff <= UPPER_BOUND) {
       return true
     }
     return false
@@ -104,7 +103,7 @@ export default function SimulateTrading(props){
 
   const handleClick = async(event) => {
     const response = await saveEntry(left, right, isTradeFair)
-    if(response.status == 200) {
+    if(response.status === 200) {
       setSaveEntrySuccess(true)
       setSnackbarOpen(true)
     } else {
@@ -124,7 +123,7 @@ export default function SimulateTrading(props){
             <Typography className={classes.veredictBottomText}> {isTradeFair ? "is fair!" : "is not fair :("} </Typography>
           </Grid>
           <Grid item sm={12} className={classes.imgWrapper}>
-            {isTradeFair ? <img src={Check} className={classes.img} height="auto"/> : <img src={Close} className={classes.img} height="auto" />}
+            {isTradeFair ? <img src={Check} className={classes.img} height="auto" alt={"check"}/> : <img src={Close} className={classes.img} height="auto" alt={"close"}/>}
           </Grid>
           <Grid item sm={12} className={classes.saveToHistoryWrapper}>
             <Button onClick={() => handleClick()} className={classes.link} >Save to your history</Button>

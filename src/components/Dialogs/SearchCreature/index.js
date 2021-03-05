@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { retrieveResourceByName } from './thirdPartyAPI.js'
@@ -27,7 +27,6 @@ export default function SearchCreature(props){
   const [open, setOpen] = useState(props.open);
   const [creature, setCreature] = useState(false)
   const [creatureName, setCreatureName] = useState('')
-  const [chosenCreature, setChosenCreature] = useState('')
 
 
   const handleClose = () => {
@@ -39,7 +38,6 @@ export default function SearchCreature(props){
   }
 
   const pokemonIChooseYou = (creature) => {
-    setChosenCreature(creature)
     props.setItems(prevState => [...prevState, creature])
   }
 

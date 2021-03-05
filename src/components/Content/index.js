@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles'
-import ModalProvider,{ useModal } from 'mui-modal-provider'
-import {Grid, DialogTitle, Typography, List, ListItem, ListSubheader, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
+import { useModal } from 'mui-modal-provider'
+import {Grid, Typography, List, ListItem, ListItemIcon, Checkbox, Button, Paper} from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import SearchCreature from './../Dialogs/SearchCreature'
 import SimulateTrading from './../Dialogs/SimulateTrading'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 const MAX_ITEMS = 6
 
 const useStyles = makeStyles((theme) => ({
@@ -17,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     overflow: 'auto',
-    minHeight: '50vh',
-    maxHeight: '50vh'
+    height: '60vh',
+    display: 'flex',
+    flexDirection: 'column'
   },
   button: {
     margin: theme.spacing(0.5, 0),
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   middleColumn: {
     margin: '3rem 0 0 0',
-    minWidth: '25vh',
+    minWidth: '40vh',
   },
   addCreatureRow: {
     display: 'flex',
@@ -64,10 +64,16 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonAddCreature: {
     textTransform: 'capitalize',
+    alignSelf: 'center',
+    justifyContent: 'flex-end'
   },
   buttonText: {
     fontWeight: theme.typography.medium,
     textTransform: 'capitalize'
+  },
+  list: {
+    height: '45vh',
+    overflow: 'auto'
   }
 }));
 
@@ -124,8 +130,7 @@ export default function Content() {
 
   const customList = (items, setItems) => (
     <Paper className={classes.paper} elevation={10}>
-
-      <List dense component="div" role="list">
+      <List dense className={classes.list} component="div" role="list">
         {items.map((item) => {
           const labelId = `transfer-list-item-${item.id}-label`;
           return (
@@ -142,7 +147,7 @@ export default function Content() {
                     </ListItemIcon>
                   </Grid>
                   <Grid item sm={3}>
-                    <img src={POKE_SPRITES_URL+item.id+POKE_SPRITES_FORMAT} className={classes.img} />
+                    <img src={POKE_SPRITES_URL+item.id+POKE_SPRITES_FORMAT} className={classes.img} alt={"sprite"}/>
                   </Grid>
                   <Grid item sm={1}></Grid>
                   <Grid item sm={2}>
@@ -154,9 +159,9 @@ export default function Content() {
                   </Grid>
                 </Grid>
               </ListItem>
-          );
-        })}
-      </List>
+              );
+            })}
+          </List>
         <Button color="secondary"
                 className={classes.buttonAddCreature}
                 variant={items.length < MAX_ITEMS ? "contained" : "disabled" }
