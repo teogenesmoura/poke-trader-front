@@ -4,6 +4,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
     {
     typography: {
       fontFamily: "Open Sans, sans-serif",
+      hairline: 100,
       light: 300,
       regular: 400,
       medium: 600,

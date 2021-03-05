@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import ModalProvider,{ useModal } from 'mui-modal-provider'
 import {Grid, DialogTitle, Typography, List, ListItem, ListSubheader, ListItemIcon, ListItemText, Checkbox, Button, Paper} from '@material-ui/core'
-import Alert from '@material-ui/lab/Alert';
-import SearchCreature from './../SearchCreature'
-import Dialog from '@material-ui/core/Dialog'
+import Alert from '@material-ui/lab/Alert'
+import SearchCreature from './../Dialogs/SearchCreature'
+import SimulateTrading from './../Dialogs/SimulateTrading'
 import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 const MAX_ITEMS = 6
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +66,8 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
   },
   buttonText: {
-    fontWeight: theme.typography.medium
+    fontWeight: theme.typography.medium,
+    textTransform: 'capitalize'
   }
 }));
 
@@ -122,7 +123,8 @@ export default function Content() {
   }
 
   const customList = (items, setItems) => (
-    <Paper className={classes.paper} elevation="10">
+    <Paper className={classes.paper} elevation={10}>
+
       <List dense component="div" role="list">
         {items.map((item) => {
           const labelId = `transfer-list-item-${item.id}-label`;
@@ -155,7 +157,6 @@ export default function Content() {
           );
         })}
       </List>
-      <div className={classes.addCreatureRow}>
         <Button color="secondary"
                 className={classes.buttonAddCreature}
                 variant={items.length < MAX_ITEMS ? "contained" : "disabled" }
@@ -163,7 +164,6 @@ export default function Content() {
                 disableElevation>
           <Typography className={classes.buttonText}>Add pokemon</Typography>
         </Button>
-      </div>
       {items.length === MAX_ITEMS ? <Alert severity="error">You've already selected 6 creatures!</Alert>  : ''}
     </Paper>
   );
@@ -215,6 +215,13 @@ export default function Content() {
             aria-label="move all left"
           >
             ≪
+          </Button>
+          <Button color="secondary"
+                  className={classes.button}
+                  variant={"contained"}
+                  onClick={() => showModal(SimulateTrading, {left: left, right: right})}
+                  disableElevation>
+            <Typography className={classes.buttonText}>Simulate trading!</Typography>
           </Button>
         </Grid>
       </Grid>

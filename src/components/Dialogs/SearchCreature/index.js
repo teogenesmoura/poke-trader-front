@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import {Grid, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { retrieveResourceByName } from './thirdPartyAPI.js'
-import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../api_urls'
+import { POKE_SPRITES_URL, POKE_SPRITES_FORMAT } from './../../../api_urls'
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     minHeight: '30vh',
     maxHeight: '70vh',
     padding: '1rem',
-    minWidth: '25%'
+    minWidth: '35%'
   },
   buttonRow: {
     display: 'flex',

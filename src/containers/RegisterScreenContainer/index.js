@@ -77,12 +77,15 @@ class RegisterScreen extends React.Component {
 
  registerUser = async(event) => {
     event.preventDefault()
-    const result = await sendRegistrationRequest(this.state.username, this.state.password, this.state.email)
-    if(result.status === 201) {
-      axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
-      localStorage.setItem('access_token', result.data.auth_token)
-      this.setState({succesfulRegistration:true})
-    } else {
+    try {
+      const result = await sendRegistrationRequest(this.state.username, this.state.password, this.state.email)
+      if(result.status === 201) {
+        axiosInstance.defaults.headers['Authorization'] = "Bearer " + result.data.auth_token
+        localStorage.setItem('access_token', result.data.auth_token)
+        this.setState({succesfulRegistration:true})
+      }
+    } catch(e) {
+      console.log(e)
       this.setState(prevState => ({
         error: {...this.state.error,  status: true }
       }))

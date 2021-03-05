@@ -1,5 +1,5 @@
-import axiosInstance from '../../auth/axiosApi'
-import {POKE_API_SEARCH_BY_NAME_URL} from './../../api_urls'
+import axiosInstance from '../../../auth/axiosApi'
+import {POKE_API_SEARCH_BY_NAME_URL} from './../../../api_urls'
 
 export async function retrieveResourceByName(name) {
   if(!name) return ''
