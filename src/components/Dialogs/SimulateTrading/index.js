@@ -94,10 +94,6 @@ export default function SimulateTrading(props){
     return false
   }
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  };
-
   const handleClose = () => {
     setOpen(false)
   };
@@ -108,7 +104,6 @@ export default function SimulateTrading(props){
 
   const handleClick = async(event) => {
     const response = await saveEntry(left, right, isTradeFair)
-    console.log(JSON.stringify(response))
     if(response.status == 200) {
       setSaveEntrySuccess(true)
       setSnackbarOpen(true)

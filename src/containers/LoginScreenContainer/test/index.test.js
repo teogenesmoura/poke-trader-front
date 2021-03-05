@@ -31,7 +31,6 @@ describe('Test login Lifecycle', () => {
     emailField.instance().value = "test_user"
     emailField.simulate("change")
     const passwordField = wrapper.find('input').at(1)
-    console.log(passwordField.debug())
     passwordField.instance().value = "test_user"
     passwordField.simulate("change")
     const button = wrapper.find("button").at(0);
@@ -47,7 +46,6 @@ describe('Test login Lifecycle', () => {
     emailField.instance().value = "test_user"
     emailField.simulate("change")
     const passwordField = wrapper.find('input').at(1)
-    console.log(passwordField.debug())
     passwordField.instance().value = "test_user"
     passwordField.simulate("change")
     const button = wrapper.find("button").at(0);
