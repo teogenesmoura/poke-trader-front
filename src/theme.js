@@ -75,5 +75,11 @@ import { createMuiTheme } from '@material-ui/core/styles';
       black: {
         main: '#000'
       },
+      green: {
+        main: '#2ecc71'
+      },
+      red: {
+        main: '#e74c3c'
+      }
     },
   });

@@ -11,5 +11,5 @@ import MockTheme from './../../../mockTheme';
 describe('Test Content Component', () => {
   test("Test if the component mounts succesfully", async() => {
     const wrapper = mount(<Router><MockTheme><Content/></MockTheme></Router>)
-  })
+  }) 
 })

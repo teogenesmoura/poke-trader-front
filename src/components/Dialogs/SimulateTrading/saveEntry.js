@@ -1,12 +1,16 @@
 import axiosInstance from './../../../auth/axiosApi'
 import {CREATE_ENTRY_USER} from './../../../api_urls'
 
-async function sanitizeEntry(entry) {
-  let result = {}
-  result['id'] = entry[0].id
-  result['name'] = entry[0].name
-  result['base_experience'] = entry[0].base_experience
-  result['type'] = process.env.REACT_APP_CREATURE_TYPE
+async function sanitizeEntry(entries) {
+  let result = []
+  entries.forEach(entry =>  {
+    let curr = {}
+    curr['id'] = entry.id
+    curr['name'] = entry.name
+    curr['base_experience'] = entry.base_experience
+    curr['type'] = process.REACT_APP_CREATURE_TYPE
+    result.push(curr)
+  })
   return result
 }
 
