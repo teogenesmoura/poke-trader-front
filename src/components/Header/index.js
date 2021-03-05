@@ -7,14 +7,15 @@ import  { INITIAL_PAGE_PATH, DASHBOARD_PAGE_PATH, HISTORY_PAGE_PATH, LOGOUT_PAGE
 
 const useStyles = makeStyles((theme) => ({
   body: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: '15vh',
-    wrap: 'no-wrap'
   },
   navigation: {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '15vh',
     padding: '0 10rem'
   },
   navigationLinks: {
@@ -27,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   logo: {
+    justifyContent: 'center',
     alignItems: 'center',
-    height: '15vh'
   },
   profile: {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '15vh'
+    height: '15vh',
   }
 }));
 
@@ -43,7 +44,7 @@ export default function Header() {
   return (
     <Grid container className={classes.body}>
       <Grid item sm={3} className={classes.logo}>
-        <img src={Logo} height="auto" alt="poketrader logo" />
+        <img src={Logo} alt="poketrader logo" />
       </Grid>
       <Grid item sm={6} className={classes.navigation}>
         <Link href={DASHBOARD_PAGE_PATH} id="home" className={classes.navigationLinks}> Home </Link>
