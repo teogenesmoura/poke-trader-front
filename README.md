@@ -23,7 +23,8 @@ PokeTrader is the [BxBlue](http://bxblue.com.br) challenge for software develope
 - Several trade-offs were taken into account while building this app. The first of them is that it **is not** responsive. When I prototyped it in Figma I thought it was a great experience in the desktop and I decided not to focus on an mobile version. 
 
 - Both back and front-ends are intentionally generalists, so that the application can be used in the future for other types of creatures such as Digimons, for example. 
-- 
+
+
 ## Live demo
 A live demo of this project can be found [here](http://poketraderfront.herokuapp.com/)
 
